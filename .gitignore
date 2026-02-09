@@ -1,0 +1,18 @@
+# Unreal Engine
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+
+# Build results
+Build/
+
+# IDE files
+*.sln
+*.xcodeproj
+*.xcworkspace
+
+# OS junk
+.DS_Store
+Thumbs.db
