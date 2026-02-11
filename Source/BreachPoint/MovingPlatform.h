@@ -7,18 +7,19 @@
 
 #include "Math/Vector.h"
 #include "Math/UnrealMathUtility.h"
+#include "GameFramework/Actor.h"
 
-#include "Mover.generated.h"
+#include "MovingPlatform.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class BREACHPOINT_API UMover : public UActorComponent
+class BREACHPOINT_API UMovingPlatform : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UMover();
+	UMovingPlatform();
 
 protected:
 	// Called when the game starts
@@ -28,12 +29,12 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
-	AActor* OwnerActorForMover;
-	FVector StartLocation;
-	FVector EndLocation;
-	
+	//UPROPERTIES----------------------------------------
 	UPROPERTY(EditAnywhere)
 	FVector Range;
+
+	UPROPERTY(EditAnywhere)
+	FRotator RotationVelocity;
 
 	UPROPERTY(EditAnywhere)
 	float TimeToMove = 4.0f;
@@ -41,4 +42,21 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool ShouldMove = false;
 
+	UPROPERTY(EditAnywhere)
+	bool ShouldRotate = false;
+	
+	//FUNCTIONS-------------------------------------------
+	void Move(float DeltaTime);
+	void Rotate(float DeltaTime);
+	
+	//GET,SET
+	bool GetShouldMove();
+	void SetShouldMove(bool NewShouldMove);
+	bool GetShouldRotate();
+	void SetShouldRotate(bool NewShouldRotate);
+
+	//Vars------------------------------------------------
+	AActor* OwnerActor;
+	FVector StartLocation;
+	FVector EndLocation;
 };
